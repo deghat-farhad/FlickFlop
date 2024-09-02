@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "FlickFlop"
 include(":app")
- 
+include(":common")
+include(":movie_list")
