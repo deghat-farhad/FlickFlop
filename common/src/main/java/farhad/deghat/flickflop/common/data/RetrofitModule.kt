@@ -15,6 +15,9 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import javax.inject.Named
 
+const val BASE_URL_NAME = "baseUrl"
+const val IMAGE_BASE_URL_NAME = "imageBaseUrl"
+
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
@@ -23,7 +26,7 @@ object RetrofitModule {
         httpClient: OkHttpClient,
         jsonConverterFactory: Converter.Factory,
         resultCallAdapterFactory: ResultCallAdapterFactory,
-        @Named("BaseUrl") baseUrl: String,
+        @Named(BASE_URL_NAME) baseUrl: String,
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -44,7 +47,7 @@ object RetrofitModule {
     fun json(): Json = Json{ ignoreUnknownKeys = true }
 
     @Provides
-    @Named("BaseUrl")
+    @Named(BASE_URL_NAME)
     fun baseUrl() = "https://api.themoviedb.org/3/"
 
     @Provides
@@ -78,4 +81,8 @@ object RetrofitModule {
         logInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return logInterceptor
     }
+
+    @Provides
+    @Named(IMAGE_BASE_URL_NAME)
+    fun imageBaseUrl() = "https://image.tmdb.org/t/p/w780"
 }

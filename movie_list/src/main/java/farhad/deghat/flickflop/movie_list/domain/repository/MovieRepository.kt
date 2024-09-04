@@ -1,7 +1,9 @@
 package farhad.deghat.flickflop.movie_list.domain.repository
 
-import farhad.deghat.flickflop.movie_list.domain.model.MoviesPage
+import androidx.paging.PagingData
+import farhad.deghat.flickflop.movie_list.domain.model.Movie
+import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
-        suspend fun getPopularMovies(page: Int): Result<MoviesPage>
+    suspend fun getPopularMovies(): Flow<PagingData<Movie>>
 }

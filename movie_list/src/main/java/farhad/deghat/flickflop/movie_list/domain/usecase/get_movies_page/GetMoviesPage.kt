@@ -1,13 +1,14 @@
 package farhad.deghat.flickflop.movie_list.domain.usecase.get_movies_page
 
-import farhad.deghat.flickflop.common.domain.usecase.UseCaseWithParams
-import farhad.deghat.flickflop.movie_list.domain.model.MoviesPage
+import androidx.paging.PagingData
+import farhad.deghat.flickflop.common.domain.usecase.UseCase
+import farhad.deghat.flickflop.movie_list.domain.model.Movie
 import farhad.deghat.flickflop.movie_list.domain.repository.MovieRepository
-import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
-class GetMoviesPage @Inject constructor(
+class GetMoviesPage(
     private val moviesRepository: MovieRepository
-) : UseCaseWithParams<Result<MoviesPage>, GetMoviesPageParams> {
-    override suspend fun invoke(params: GetMoviesPageParams) =
-        moviesRepository.getPopularMovies(params.page)
+) : UseCase<Flow<PagingData<Movie>>> {
+    override suspend fun invoke() =
+        moviesRepository.getPopularMovies()
 }
