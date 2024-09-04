@@ -7,10 +7,10 @@ import javax.inject.Inject
 
 class MoviePageEntityMapper @Inject constructor(
     private val movieEntityMapper: MovieEntityMapper,
-): ToDomainMapper<MoviesPageEntity, MoviesPage> {
+) : ToDomainMapper<MoviesPageEntity, MoviesPage> {
     override fun mapToDomain(from: MoviesPageEntity) = MoviesPage(
         page = from.page,
-        movies = from.movies.map { movieEntity ->  movieEntityMapper.mapToDomain(movieEntity) },
+        movies = from.movies.map { movieEntity -> movieEntityMapper.mapToDomain(movieEntity) },
         totalPages = from.totalPages,
         totalResults = from.totalResults,
     )

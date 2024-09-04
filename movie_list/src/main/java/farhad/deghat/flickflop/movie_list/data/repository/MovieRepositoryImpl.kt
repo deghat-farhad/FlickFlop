@@ -15,12 +15,12 @@ import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val remote: Remote,
-    private val movieEntityMapper: MovieEntityMapper
-): MovieRepository {
+    private val movieEntityMapper: MovieEntityMapper,
+) : MovieRepository {
     override suspend fun getPopularMovies(): Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(
-            pageSize = Int.MAX_VALUE,
-            prefetchDistance = 2
+            pageSize = PAGE_SIZE,
+            prefetchDistance = PREFETCH_DISTANCE,
         ),
         pagingSourceFactory = {
             MoviePagingSource(remote)
@@ -29,5 +29,10 @@ class MovieRepositoryImpl @Inject constructor(
         moviePagingData.map { movieEntity ->
             movieEntityMapper.mapToDomain(movieEntity)
         }
+    }
+
+    companion object {
+        const val PAGE_SIZE = 15
+        const val PREFETCH_DISTANCE = 2
     }
 }

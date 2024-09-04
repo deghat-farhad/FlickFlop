@@ -12,10 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import farhad.deghat.flickflop.movie_list.R
 import farhad.deghat.flickflop.movie_list.presentation.model.MovieItem
 import farhad.deghat.flickflop.movie_list.presentation.viewmodel.MovieListViewModel
 import kotlinx.coroutines.flow.Flow
@@ -28,13 +30,13 @@ fun MovieListScreen(
     onRetry: () -> Unit,
     loadingState: MovieListViewModel.LoadingState
 ) {
-
+    val context = LocalContext.current
     val snackBarHostState = remember { SnackbarHostState() }
     LaunchedEffect(loadingState == MovieListViewModel.LoadingState.Error) {
         if (loadingState == MovieListViewModel.LoadingState.Error) {
             val snackBarResult = snackBarHostState.showSnackbar(
-                message = "Error",
-                actionLabel = "retry",
+                message = context.getString(R.string.failed_to_fetch_data),
+                actionLabel = context.getString(R.string.retry),
                 withDismissAction = false,
             )
 

@@ -31,7 +31,7 @@ object RetrofitModule {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(jsonConverterFactory)
-            .addCallAdapterFactory(resultCallAdapterFactory )
+            .addCallAdapterFactory(resultCallAdapterFactory)
             .client(httpClient)
             .build()
     }
@@ -39,12 +39,12 @@ object RetrofitModule {
     @Provides
     fun jsonConverterFactory(
         json: Json
-    ): Converter.Factory{
+    ): Converter.Factory {
         return json.asConverterFactory("application/json".toMediaType())
     }
 
     @Provides
-    fun json(): Json = Json{ ignoreUnknownKeys = true }
+    fun json(): Json = Json { ignoreUnknownKeys = true }
 
     @Provides
     @Named(BASE_URL_NAME)

@@ -27,6 +27,6 @@ fun LoadingItem(
 @Composable
 fun LoadingItemPreview() {
     LoadingItem(
-        modifier = Modifier.padding(16.dp) // Add padding to make it visually distinct in preview
+        modifier = Modifier.padding(16.dp)
     )
 }

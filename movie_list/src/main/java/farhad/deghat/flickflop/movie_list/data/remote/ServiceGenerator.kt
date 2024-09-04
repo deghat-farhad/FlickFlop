@@ -7,5 +7,5 @@ import javax.inject.Inject
 class ServiceGenerator @Inject constructor(
     private val retrofit: Retrofit
 ) {
-    val moviesService: MoviesService =   retrofit.create(MoviesService::class.java)
+    val moviesService: MoviesService = retrofit.create(MoviesService::class.java)
 }
